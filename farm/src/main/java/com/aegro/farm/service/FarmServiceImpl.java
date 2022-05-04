@@ -6,17 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class FarmServiceImpl implements FarmService{
 
-    @Autowired
     private FarmRepository farmRepository;
 
     public FarmServiceImpl(){}
+
     @Autowired
     public FarmServiceImpl(FarmRepository farmRepository){
         this.farmRepository = farmRepository;
     }
     @Override
     public Farm create(Farm farm) {
-
         return farmRepository.insert(farm);
     }
 
@@ -31,5 +30,4 @@ public class FarmServiceImpl implements FarmService{
         farmRepository.deleteById(id);
         return !farmRepository.existsById(id);
     }
-
 }

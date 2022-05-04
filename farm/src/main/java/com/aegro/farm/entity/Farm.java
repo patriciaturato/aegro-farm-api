@@ -1,10 +1,17 @@
 package com.aegro.farm.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
 
+@Entity
+@Document(collection = "Farm")
 public class Farm {
+    @Id
     private String id;
     private String name;
     private List<Plot> plots;

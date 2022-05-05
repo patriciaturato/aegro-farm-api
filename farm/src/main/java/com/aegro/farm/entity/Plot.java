@@ -1,9 +1,16 @@
 package com.aegro.farm.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Entity
+@Document(collection = "Plot")
 public class Plot {
+    @Id
     private String id;
     private BigDecimal area;
     private List<BigDecimal> production;

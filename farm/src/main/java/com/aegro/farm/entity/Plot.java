@@ -1,5 +1,6 @@
 package com.aegro.farm.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
@@ -13,13 +14,15 @@ public class Plot {
     @Id
     private String id;
     private BigDecimal area;
-    private List<BigDecimal> production;
+    @Autowired
+    private List<Production> productions;
     private BigDecimal productivity;
 
     public Plot() {
     }
 
     public Plot(String id, BigDecimal area) {
+        this.id = id;
         this.area = area;
     }
 
@@ -39,19 +42,20 @@ public class Plot {
         this.area = area;
     }
 
-    public void addProduction(BigDecimal production){
-        this.production.add(production);
+    public List<Production> getProductions() {
+        return productions;
     }
 
-    public void calculateProductivity() {
-        if(this.production.isEmpty()) {
-            System.out.println("No production registration: can't calculate productivity");
-        }
-        this.productivity = this.production.get(this.production.size()-1).divide(getArea());
+    public void addProduction(Production production){
+        this.productions.add(production);
     }
 
     public BigDecimal getProductivity(){
         return this.productivity;
+    }
+
+    public void setProductivity(BigDecimal productivity) {
+        this.productivity = productivity;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class Plot {
         return "Plot{" +
                 "id='" + id + '\'' +
                 ", area=" + area +
-                ", production=" + production +
+                ", productions=" + productions +
                 ", productivity=" + productivity +
                 '}';
     }

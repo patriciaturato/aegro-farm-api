@@ -1,12 +1,10 @@
 package com.aegro.farm.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Document(collection = "Plot")
@@ -14,8 +12,7 @@ public class Plot {
     @Id
     private String id;
     private BigDecimal area;
-    @Autowired
-    private List<Production> productions;
+    private String farmId;
     private BigDecimal productivity;
 
     public Plot() {
@@ -42,12 +39,12 @@ public class Plot {
         this.area = area;
     }
 
-    public List<Production> getProductions() {
-        return productions;
+    public String getFarmId() {
+        return farmId;
     }
 
-    public void addProduction(Production production){
-        this.productions.add(production);
+    public void setFarmId(String farmId) {
+        this.farmId = farmId;
     }
 
     public BigDecimal getProductivity(){
@@ -63,7 +60,7 @@ public class Plot {
         return "Plot{" +
                 "id='" + id + '\'' +
                 ", area=" + area +
-                ", productions=" + productions +
+                ", farmId='" + farmId + '\'' +
                 ", productivity=" + productivity +
                 '}';
     }

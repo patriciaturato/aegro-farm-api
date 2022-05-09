@@ -37,4 +37,9 @@ public class ProductionServiceImpl implements ProductionService {
     public boolean deleteAllProductions(String plotId){
         return productionRepository.deleteByPlotId(plotId);
     }
+
+    @Override
+    public List<Production> getPlotProductions(String plotId) {
+        return productionRepository.findByPlotId(plotId);
+    }
 }

@@ -25,8 +25,8 @@ public class PlotServiceImpl implements PlotService {
     }
 
     @Override
-    public Plot updatePlot(String id, Plot plot) {
-        plot.setId(id);
+    public Plot updatePlot(String plotId, Plot plot) {
+        plot.setId(plotId);
         return plotRepository.save(plot);
     }
 
@@ -42,5 +42,15 @@ public class PlotServiceImpl implements PlotService {
         List<Plot> plotsToDelete = plotRepository.findByFarmId(farmId);
         plotsToDelete.forEach(plot -> deletePlot(plot.getId()));
         return true; /*need to verify if all plots with farmId were deleted from the database*/
+    }
+
+    @Override
+    public Plot getPlot(String plotId){
+        return plotRepository.findPlotById(plotId);
+    }
+
+    @Override
+    public List<Plot> getFarmPlots(String farmId) {
+        return plotRepository.findByFarmId(farmId);
     }
 }

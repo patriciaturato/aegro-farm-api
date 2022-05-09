@@ -6,6 +6,8 @@ import com.aegro.farm.service.FarmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FarmServiceImpl implements FarmService {
 
@@ -22,16 +24,26 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public Farm updateFarm(String id, Farm farm) {
-        farm.setId(id);
+    public Farm updateFarm(String farmId, Farm farm) {
+        farm.setId(farmId);
         return farmRepository.save(farm);
     }
 
     @Override
-    public boolean deleteFarm(String id) {
-        plotService.deleteFarmPlots(id);
-        farmRepository.deleteById(id);
-        return !farmRepository.existsById(id);
+    public boolean deleteFarm(String farmId) {
+        plotService.deleteFarmPlots(farmId);
+        farmRepository.deleteById(farmId);
+        return !farmRepository.existsById(farmId);
+    }
+
+    @Override
+    public Farm getFarm(String farmId) {
+        return farmRepository.findFarmById(farmId);
+    }
+
+    @Override
+    public List<Farm> getAllFarms() {
+        return farmRepository.findAll();
     }
 
     public boolean isValid(Farm farm){

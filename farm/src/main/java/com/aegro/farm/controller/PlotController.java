@@ -1,33 +1,33 @@
 package com.aegro.farm.controller;
 
 import com.aegro.farm.entity.Plot;
-import com.aegro.farm.service.PlotServiceImpl;
+import com.aegro.farm.service.implementation.PlotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/farms/{farmId}/plots")
+@RequestMapping("/api/v1/farm/{farmId}")
 public class PlotController {
     @Autowired
     private PlotServiceImpl plotService;
 
-    @PostMapping
+    @PostMapping("/plot")
     public ResponseEntity<Plot> createPlot(@RequestBody Plot plot){
-        Plot createdPlot = plotService.create(plot);
-        return new ResponseEntity<Plot>(createdPlot, HttpStatus.CREATED);
+        Plot createdPlot = plotService.createPlot(plot);
+        return new ResponseEntity<>(createdPlot, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{plotId}")
+    @PutMapping("/plot/{plotId}")
     public ResponseEntity<Plot> updatePlot(@PathVariable("plotId") String id, @RequestBody Plot plot){
-        Plot updatedPlot = plotService.update(id, plot);
-        return new ResponseEntity<Plot>(updatedPlot, HttpStatus.OK);
+        Plot updatedPlot = plotService.updatePlot(id, plot);
+        return new ResponseEntity<>(updatedPlot, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{plotId}")
-    public ResponseEntity<Plot> deletePlot(@PathVariable("plotId") String id){
-        boolean isDeleted = plotService.delete(id);
+    @DeleteMapping("/plot/{plotId}")
+    public ResponseEntity deletePlot(@PathVariable("plotId") String id){
+        boolean isDeleted = plotService.deletePlot(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

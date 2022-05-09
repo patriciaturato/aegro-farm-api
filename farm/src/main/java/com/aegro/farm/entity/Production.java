@@ -13,6 +13,7 @@ public class Production {
     @Id
     private String id;
     private BigDecimal production;
+    private String plotId;
 
     public Production() {
     }
@@ -38,6 +39,14 @@ public class Production {
         return production;
     }
 
+    public String getPlotId() {
+        return plotId;
+    }
+
+    public void setPlotId(String plotId) {
+        this.plotId = plotId;
+    }
+
     public void setProduction(BigDecimal production) {
         this.production = production;
     }
@@ -47,6 +56,7 @@ public class Production {
         return "Production{" +
                 "id='" + id + '\'' +
                 ", production=" + production +
+                ", plotId='" + plotId + '\'' +
                 '}';
     }
 }

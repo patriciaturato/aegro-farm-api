@@ -3,7 +3,8 @@ package com.aegro.farm.service;
 import com.aegro.farm.entity.Plot;
 
 public interface PlotService {
-    Plot create(Plot plot);
-    Plot update(String id, Plot plot);
-    boolean delete(String plotId);
+    Plot createPlot(Plot plot);
+    Plot updatePlot(String id, Plot plot);
+    boolean deletePlot(String plotId);
+    boolean deleteFarmPlots(String farmId);
 }

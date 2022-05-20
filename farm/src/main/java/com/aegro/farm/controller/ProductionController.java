@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/farm/{farmId}/plot/{plotId}")
 public class ProductionController {
@@ -30,5 +32,10 @@ public class ProductionController {
     public ResponseEntity delete(@PathVariable("productionId") String id){
         boolean isDeleted = productionService.deleteProduction(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/productions")
+    public ResponseEntity<List<Production>> getListOfProductions(@PathVariable("plotId") String plotId){
+        return new ResponseEntity<>(productionService.getPlotProductions(plotId), HttpStatus.OK);
     }
 }

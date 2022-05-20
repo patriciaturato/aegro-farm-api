@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class FarmController {
@@ -22,15 +24,25 @@ public class FarmController {
         Farm createdFarm = farmService.createFarm(farm);
         return new ResponseEntity<>(createdFarm, HttpStatus.CREATED);
     }
-    @PutMapping("/farm/{id}")
-    public ResponseEntity<Farm> updateFarm(@PathVariable("id") String id, @RequestBody Farm farm){
+    @PutMapping("/farm/{farmId}")
+    public ResponseEntity<Farm> updateFarm(@PathVariable("farmId") String id, @RequestBody Farm farm){
         Farm updatedFarm = farmService.updateFarm(id, farm);
         return new ResponseEntity<>(updatedFarm, HttpStatus.OK);
     }
 
-    @DeleteMapping("/farm/{id}")
-    public ResponseEntity deleteFarm(@PathVariable("id") String id){
+    @DeleteMapping("/farm/{farmId}")
+    public ResponseEntity deleteFarm(@PathVariable("farmId") String id){
         boolean isDeleted = farmService.deleteFarm(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/farm/{farmId}")
+    public ResponseEntity<Farm> getFarm(@PathVariable("farmId") String id){
+        return new ResponseEntity<>(farmService.getFarm(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/farms")
+    public ResponseEntity<List<Farm>> getListOfFarms(){
+        return new ResponseEntity<>(farmService.getAllFarms(), HttpStatus.OK);
     }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface PlotRepository extends MongoRepository<Plot, String> {
+    @Query("{ 'plotId' : ?0 }")
+    Plot findPlotById(String plotId);
     @Query("{ 'farmId' : ?0 }")
     List<Plot> findByFarmId(String farmId);
 }
